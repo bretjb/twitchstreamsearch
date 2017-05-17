@@ -1,10 +1,15 @@
 import Marionette from 'backbone.marionette';
+import LayoutView from './views/LayoutView/LayoutView.js';
 
 const MainApp = Marionette.Application.extend({
-    onStart: () => {
-        console.log('STARTED');
+    region: 'body',
+
+    onStart: function onStart() {
+        this.showView(new LayoutView());
     }
 });
 
-var app = new MainApp();
-app.start();
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new MainApp();
+    app.start();
+});

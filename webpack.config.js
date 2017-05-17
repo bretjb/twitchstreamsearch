@@ -1,13 +1,19 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 const config = {
+    devtool: 'eval-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: false
+    },
     entry: {
         app: './src/app.js'
     },
 
     output: {
         filename: '[name].bundle.js',
-        path: __dirname + '/dist'
+        path: path.join(__dirname, 'dist')
     },
     module: {
         rules: [
@@ -34,6 +40,11 @@ const config = {
                         loader: 'sass-loader'
                     }
                 ]
+            },
+            {
+                test: /\.hbs$/,
+                exclude: /node_modules/,
+                use: 'handlebars-loader'
             }
         ]
     },
