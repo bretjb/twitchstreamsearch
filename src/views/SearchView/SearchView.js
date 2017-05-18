@@ -12,19 +12,26 @@ export default Marionette.View.extend({
     },
 
     events: {
-        'click @ui.searchBtn': 'search'
+        'click @ui.searchBtn': 'userSearch'
     },
 
-    search: function search(event) {
-        const self = this;
+    onRender: function onRender() {
+        this.executeSearch('overwatch');
+    },
+
+    userSearch: function userSearch(event) {
         event.preventDefault();
-        const searchTerm = this.getSearchTerm();
-        Caller
-            .getTwitchStreams(searchTerm)
-            .then(response => self.triggerMethod('search:updated', response));
+        this.executeSearch(this.getSearchTerm());
     },
 
     getSearchTerm: function getSearchTerm() {
         return this.getUI('searchBox').val();
+    },
+
+    executeSearch: function executeSearch(searchTerm, offset) {
+        const self = this;
+        Caller
+            .getTwitchStreams(searchTerm, offset)
+            .then(response => self.triggerMethod('search:updated', response));
     }
 });

@@ -1,3 +1,4 @@
+import PaginationModel from '../models/PaginationModel.js';
 import StreamsCollection from '../models/StreamsCollection.js';
 
 const executeTwitchRequest = (endpoint) => {
@@ -15,10 +16,21 @@ const executeTwitchRequest = (endpoint) => {
     return fetch(url, fetchOptions);
 };
 
-const getTwitchStreams = function getTwitchStreams(searchTerm) {
-    return executeTwitchRequest(`streams/?game=${searchTerm}`)
+const getTwitchStreams = (searchTerm, page) => {
+    //debugger;
+    let userOffset = 0;
+    if (page != null) {
+        userOffset = page * 25;
+    }
+    return executeTwitchRequest(`streams/?game=${searchTerm}&offset=${userOffset}`)
         .then(response => response.json())
-        .then(response => new StreamsCollection(response.streams));
+        .then(response => new PaginationModel({
+            totalResults: response._total,
+            totalPages: Math.round(response._total / 25),
+            currentPage: page, // maybe?
+            results: new StreamsCollection(response.streams),
+            currentSearchTerm: searchTerm
+        }));
 };
 
 // TODO: Delete me!
