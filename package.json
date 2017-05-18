@@ -11,17 +11,21 @@
     "backbone.marionette": "^3.3.1",
     "bootstrap": "4.0.0-alpha.6",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "promise-polyfill": "^6.0.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.1",
     "handlebars": "^4.0.8",
     "handlebars-loader": "^1.5.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.5",
+    "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },

@@ -1,0 +1,11 @@
+{
+    "ecmaVersion": "2016",
+    "env": {
+        "browser": true
+    },
+    "extends": "airbnb-base",
+    "rules": {
+        "indent": ["error", 4],
+        "comma-dangle": ["error", "only-multiline"]
+    }
+}

@@ -17,10 +17,10 @@ const config = {
     },
     module: {
         rules: [
-            { 
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: { 
+                use: {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env']
