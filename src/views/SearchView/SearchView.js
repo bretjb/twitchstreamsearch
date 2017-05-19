@@ -16,18 +16,14 @@ export default Marionette.View.extend({
     },
 
     onRender: function onRender() {
-        const title = this.getRandomTitle();
-        this.executeSearch(title);
+        this.executeSearch(this.getRandomTitle());
     },
 
     getRandomTitle: () => {
         const games = ['Dungeons & Dragons', 'Overwatch', 'Earthbound',
         'Rocket League', 'FTL: Faster Than Light'];
 
-        const min = 0;
-        const max = games.length;
-        const item = Math.floor(Math.random() * max);
-        if (games[item] == null) debugger;
+        const item = Math.floor(Math.random() * games.length);
         return games[item];
     },
 
