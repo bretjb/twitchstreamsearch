@@ -1,6 +1,10 @@
 <div class="col">
-    total results: {{totalResults}}
+    Total Results: {{totalResults}}
 </div>
-<div class="col align-self-end">
-    <a id="pv-prev"><=</a> {{humanCurrentPage}} of {{totalPages}} <a id="pv-next">=></a>
+{{#unless emptyResults}}
+<div class="col">
+    <div class="d-flex justify-content-end">
+        <a id="pv-prev" href="#"><i class="material-icons">arrow_back</i></a> {{humanCurrentPage}} / {{totalPages}} <a id="pv-next" href="#"><i class="material-icons">arrow_forward</i></a>
+    </div>
 </div>
+{{/unless}}

@@ -22,17 +22,20 @@ export default Marionette.View.extend({
         return {
             humanCurrentPage: function humanCurrentPage() {
                 return self.model.get('currentPage') + 1;
-            }
+            },
+            emptyResults: this.model.get('totalResults') === 0
         };
     },
 
     next: function next() {
-        this.triggerMethod('pagination:updated', this.model.get('currentPage') + 1);
-        this.render();
+        const newCurrentPage = this.model.get('currentPage') + 1;
+        this.model.set('currentPage', newCurrentPage);
+        this.triggerMethod('pagination:updated', newCurrentPage);
     },
 
     prev: function prev() {
-        this.triggerMethod('pagination:updated', this.model.get('currentPage') - 1);
-        this.render();
+        const newCurrentPage = this.model.get('currentPage') - 1;
+        this.model.set('currentPage', newCurrentPage);
+        this.triggerMethod('pagination:updated', newCurrentPage);
     }
 });

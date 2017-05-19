@@ -1,10 +1,20 @@
 <div class="col">
-    <img src="{{preview.medium}}" alt="preview image">
-</div>
-<div class="col">
-        <div class="row">
-            <div class="col-12"><h1>{{channel.display_name}}</h1></div>
-            <div class="col-12">{{game}} - {{viewers}} viewers</div>
-            <div class="col">{{channel.description}}</div>
+    <div class="media">
+        <img class="d-flex mr-3" src="{{preview.medium}}" alt="stream preview">
+        {{#if channel.logo}}
+        <img class="ss-logo" src="{{channel.logo}}" alt="channel logo" width="50" height="50">
+        {{/if}}
+        <div class="media-body">
+            <div class="col">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>{{channel.display_name}}</h1>
+                        <a href="{{channel.url}}" target="_blank"><i class="material-icons">link</i></a>
+                    </div>
+                    <div class="col-12">{{game}} - {{viewers}} viewers</div>
+                    <div class="col">{{channel.description}}</div>
+                </div>
+            </div>
         </div>
+    </div>
 </div>

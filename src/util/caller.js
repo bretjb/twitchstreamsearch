@@ -16,25 +16,28 @@ const executeTwitchRequest = (endpoint) => {
     return fetch(url, fetchOptions);
 };
 
-const getTwitchStreams = (searchTerm, page) => {
-    //debugger;
-    let userOffset = 0;
+const normalizePage = page => {
+    let userPage = 0;
     if (page != null) {
-        userOffset = page * 25;
+        userPage = page < 0 ? 0 : page;
     }
-    return executeTwitchRequest(`streams/?game=${searchTerm}&offset=${userOffset}`)
+    return userPage;
+};
+
+const getTwitchStreams = (searchTerm, page) => {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const userPage = normalizePage(page);
+    const userOffset = userPage * 25;
+
+    return executeTwitchRequest(`streams/?game=${encodedSearchTerm}&offset=${userOffset}`)
         .then(response => response.json())
         .then(response => new PaginationModel({
             totalResults: response._total,
-            totalPages: Math.round(response._total / 25),
-            currentPage: page, // maybe?
+            totalPages: Math.round(response._total / 25) + 1,
+            currentPage: userPage,
             results: new StreamsCollection(response.streams),
             currentSearchTerm: searchTerm
         }));
 };
-
-// TODO: Delete me!
-window.getTwitchStreams = getTwitchStreams;
-window.executeTwitchRequest = executeTwitchRequest;
 
 export { executeTwitchRequest as default, getTwitchStreams };

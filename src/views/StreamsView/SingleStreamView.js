@@ -3,9 +3,5 @@ import SingleStreamTemplate from './SingleStreamTmpl.hbs';
 
 export default Marionette.View.extend({
     template: SingleStreamTemplate,
-    className: 'row my-3',
-
-    onRender: function onRender() {
-        // console.log(this.model);
-    }
+    className: 'single-stream row my-3',
 });

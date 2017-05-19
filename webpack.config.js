@@ -1,5 +1,8 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+
 
 const config = {
     devtool: 'eval-source-map',
@@ -8,7 +11,8 @@ const config = {
         compress: false
     },
     entry: {
-        app: './src/app.js'
+        app: './src/app.js',
+        styles: './src/styles/userstyles.scss'
     },
 
     output: {
@@ -29,17 +33,7 @@ const config = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'sass-loader'
-                    }
-                ]
+                loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
             },
             {
                 test: /\.hbs$/,
@@ -51,7 +45,17 @@ const config = {
     plugins: [
         new CopyWebpackPlugin([
             { from: './src/static/index.html' }
-        ])
+        ]),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: (module) =>
+                // this assumes your vendor imports exist in the node_modules directory
+                module.context && module.context.indexOf('node_modules') !== -1
+        }),
+        new ExtractTextPlugin({
+            filename: 'styles.css',
+            allChunks: true
+        })
     ]
 };
 

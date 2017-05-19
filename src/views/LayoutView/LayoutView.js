@@ -1,6 +1,5 @@
 import Marionette from 'backbone.marionette';
 
-import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 import LayoutTemplate from './LayoutTmpl.hbs';
 import PaginationView from '../PaginationView/PaginationView.js';
 import SearchView from '../SearchView/SearchView.js';
@@ -18,12 +17,15 @@ const layoutView = Marionette.View.extend({
         Streams: '#streams'
     },
 
+    // Set up all of our components on show.
     onRender: function onRender() {
         this.showChildView('Search', new SearchView());
         this.showChildView('PaginatedListView', new PaginationView());
         this.showChildView('Streams', new StreamsView());
     },
 
+    // When a search has been executed, update the components
+    // that need updating.
     onChildviewSearchUpdated: function searchUpdated(paginationResult) {
         this.model = paginationResult;
 
@@ -38,6 +40,7 @@ const layoutView = Marionette.View.extend({
         paginationView.render();
     },
 
+    // When the page changes, re-search with the new page.
     onChildviewPaginationUpdated: function onChildViewPaginationUpdated(page) {
         const searchView = this.getChildView('Search');
         searchView.executeSearch(this.model.get('currentSearchTerm'), page);

@@ -1,0 +1,44 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+$header-bkg: #311B92;
+$brand-primary: #006064;
+
+
+body {
+    background-color: white;
+}
+
+#header {
+    background-color: $header-bkg;
+    color: white;
+    padding: 1em;
+    font-family: 'Orbitron', serif;
+    font-size: 1.5em;
+    border-radius: 0 0 10px 10px;
+    box-shadow: #B3B3B3 2px 2px 2px;
+}
+
+.search-view {
+    border-bottom: 1px solid black;
+    .btn-primary {
+        background-color: $brand-primary;
+    }
+}
+
+.single-stream {
+    h1 {
+        display: inline;
+    }
+
+    .ss-logo {
+        position: absolute;
+        top: 130px;
+        border-top: 2px solid white;
+        border-right: 2px solid white;
+    }
+
+    .media {
+        border: 1px solid black;
+        box-shadow: 5px 5px 40px -15px rgba(0, 0, 0, 0.75)
+    }
+}
