@@ -36,7 +36,7 @@ const getTwitchStreams = (searchTerm, page, currentMax) => {
         .then(response => response.json())
         .then(response => new PaginationModel({
             totalResults: response._total,
-            totalPages: Math.round(response._total / 25) + 1,
+            totalPages: Math.floor(response._total / 25) + 1,
             currentPage: userPage,
             results: new StreamsCollection(response.streams),
             currentSearchTerm: searchTerm
