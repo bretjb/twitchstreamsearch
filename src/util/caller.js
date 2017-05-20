@@ -1,3 +1,15 @@
+/*
+ * Utility method that actually makes the calls to the Twitch API.
+ *
+ * Fns:
+ * Executes a GET to an unsecured endpoint.
+ * executeTwitchRequest(str: endpoint) -> fetch object
+ *
+ * Executes a stream search and returns a PaginatedModel.
+ * getTwitchStreams(str: searchTerm, int: page, int: currentMax) -> PaginationModel
+ *
+*/
+
 import PaginationModel from '../models/PaginationModel.js';
 import StreamsCollection from '../models/StreamsCollection.js';
 
@@ -16,6 +28,13 @@ const executeTwitchRequest = (endpoint) => {
     return fetch(url, fetchOptions);
 };
 
+/*
+ * If a user requests a page out of valid range
+ * return the page to normal.
+ *
+ * 10 of 2 -> 2 of 2
+ * -1 of 2 -> 1 of 2
+ */
 const normalizePage = (page, currentMax) => {
     let userPage = 0;
     if (page != null) {

@@ -1,3 +1,6 @@
+/*
+ * Handles display for an individual stream.
+*/
 import Marionette from 'backbone.marionette';
 import SingleStreamTemplate from './SingleStreamTmpl.hbs';
 

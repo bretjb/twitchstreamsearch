@@ -1,3 +1,6 @@
+/*
+ * View for when a search term comes back empty.
+*/
 import Marionette from 'backbone.marionette';
 import EmptyStreamsTemplate from './EmptyStreamsTmpl.hbs';
 

@@ -1,6 +1,6 @@
 {
   "name": "twitchsearch",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Awesome twitch stream search",
   "main": "index.js",
   "repository": "http://localhost",
@@ -31,7 +31,8 @@
     "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
-    "start": "node_modules\\.bin\\webpack-dev-server --open",
+    "start:dev": "node_modules\\.bin\\webpack-dev-server --open",
+    "build:prod": "node_modules\\.bin\\webpack",
     "postinstall": "node_modules\\.bin\\webpack"
   }
 }

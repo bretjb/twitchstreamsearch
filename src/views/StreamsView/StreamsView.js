@@ -1,3 +1,7 @@
+/*
+ * CollectionView for all streams.
+*/
+
 import Marionette from 'backbone.marionette';
 import SingleStreamView from './SingleStreamView.js';
 import EmptyStreamsView from './EmptyStreamsView.js';

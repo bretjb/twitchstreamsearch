@@ -1,3 +1,9 @@
+/*
+ * Main layout for the Twitch Stream Search SPA.
+ * Handles showing the various parts and acts as communication medium
+ * between the child views.
+*/
+
 import Marionette from 'backbone.marionette';
 
 import LayoutTemplate from './LayoutTmpl.hbs';
@@ -40,7 +46,8 @@ const layoutView = Marionette.View.extend({
         paginationView.render();
     },
 
-    // When the page changes, re-search with the new page.
+    // When the pagination is changed (from a user input, or elsewhere)
+    // execute a search with the new data.
     onChildviewPaginationUpdated: function onChildViewPaginationUpdated(page) {
         const searchView = this.getChildView('Search');
         searchView.executeSearch(this.model.get('currentSearchTerm'), page);

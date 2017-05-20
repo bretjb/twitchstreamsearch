@@ -1,3 +1,9 @@
+/*
+ * Handles display and model updating for all pagination for Twitch Stream Search SPA.
+ *
+ * Displays pagination data and user interaction with pagination controls.
+*/
+
 import Marionette from 'backbone.marionette';
 import PaginationTemplate from './PaginationTmpl.hbs';
 import PaginationModel from '../../models/PaginationModel.js';
@@ -13,8 +19,8 @@ export default Marionette.View.extend({
     },
 
     events: {
-        'click @ui.next': 'next',
-        'click @ui.prev': 'prev'
+        'click @ui.next': 'onClickNext',
+        'click @ui.prev': 'onClickPrev'
     },
 
     templateContext: function templateContext() {
@@ -27,13 +33,13 @@ export default Marionette.View.extend({
         };
     },
 
-    next: function next() {
+    onClickNext: function onClickNext() {
         const newCurrentPage = this.model.get('currentPage') + 1;
         this.model.set('currentPage', newCurrentPage);
         this.triggerMethod('pagination:updated', newCurrentPage);
     },
 
-    prev: function prev() {
+    onClickPrev: function onClickPrev() {
         const newCurrentPage = this.model.get('currentPage') - 1;
         this.model.set('currentPage', newCurrentPage);
         this.triggerMethod('pagination:updated', newCurrentPage);

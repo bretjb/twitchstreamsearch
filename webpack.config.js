@@ -3,7 +3,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-
 const config = {
     devtool: 'eval-source-map',
     devServer: {

@@ -1,3 +1,8 @@
+/*
+ * Streams Model is a Backbone clone of the JSON data that
+ * comes back from the twitch API. See https://dev.twitch.tv/docs/v5/reference/streams/#get-live-streams
+ */
+
 import Backbone from 'backbone';
 
 export default Backbone.Model.extend({

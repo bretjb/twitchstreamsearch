@@ -1,3 +1,7 @@
+/*
+ * Handles display and model updating for all search requests for Twitch Stream Search SPA.
+*/
+
 import Marionette from 'backbone.marionette';
 import SearchTemplate from './SearchTmpl.hbs';
 import * as Caller from '../../util/caller.js';
@@ -15,6 +19,8 @@ export default Marionette.View.extend({
         'click @ui.searchBtn': 'userSearch'
     },
 
+    // Executes when the page is rendered. Will display
+    // a default search term.
     onRender: function onRender() {
         this.executeSearch(this.getRandomTitle());
     },
@@ -27,8 +33,7 @@ export default Marionette.View.extend({
         return games[item];
     },
 
-    userSearch: function userSearch(event) {
-        event.preventDefault();
+    userSearch: function userSearch() {
         this.executeSearch(this.getSearchTerm());
     },
 
@@ -36,6 +41,9 @@ export default Marionette.View.extend({
         return this.getUI('searchBox').val();
     },
 
+    // When a search is executed, we call the API, then trigger
+    // a updated search event, and finally display the new
+    // search term on the DOM.
     executeSearch: function executeSearch(searchTerm, offset) {
         const self = this;
         Caller
