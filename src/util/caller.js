@@ -16,17 +16,20 @@ const executeTwitchRequest = (endpoint) => {
     return fetch(url, fetchOptions);
 };
 
-const normalizePage = page => {
+const normalizePage = (page, currentMax) => {
     let userPage = 0;
     if (page != null) {
         userPage = page < 0 ? 0 : page;
+        if (page * 25 > currentMax) {
+            userPage = page - 1;
+        }
     }
     return userPage;
 };
 
-const getTwitchStreams = (searchTerm, page) => {
+const getTwitchStreams = (searchTerm, page, currentMax) => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
-    const userPage = normalizePage(page);
+    const userPage = normalizePage(page, currentMax);
     const userOffset = userPage * 25;
 
     return executeTwitchRequest(`streams/?game=${encodedSearchTerm}&offset=${userOffset}`)

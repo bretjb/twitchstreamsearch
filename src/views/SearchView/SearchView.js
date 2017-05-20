@@ -39,8 +39,11 @@ export default Marionette.View.extend({
     executeSearch: function executeSearch(searchTerm, offset) {
         const self = this;
         Caller
-            .getTwitchStreams(searchTerm, offset)
-            .then(response => self.triggerMethod('search:updated', response));
+            .getTwitchStreams(searchTerm, offset, this.currentMax)
+            .then(response => {
+                self.currentMax = response.get('totalResults');
+                self.triggerMethod('search:updated', response);
+            });
         this.ui.searchBox.val(searchTerm);
     }
 });
